@@ -1,8 +1,4 @@
-"""
-DeepSeek新闻数据分析系统 - 修复版
-修复了时间提取、格式化错误和主题建模问题
-版本: 2.1 (修复版)
-"""
+
 
 import pandas as pd
 import numpy as np
@@ -239,7 +235,7 @@ class DeepSeekNewsAnalyzer:
                 df_clean = df_clean.drop_duplicates(subset=['标题'], keep='first')
             print(f"   去除重复数据: {before_len} → {len(df_clean)}")
         
-        # 4. 增强版时间处理（关键修复）
+        
         print("   处理发布时间列（增强版）...")
         if '发布时间' in df_clean.columns:
             # 先尝试直接转换
@@ -298,7 +294,7 @@ class DeepSeekNewsAnalyzer:
                 if col == '正文':
                     df_clean[col] = df_clean[col].apply(lambda x: x if len(x) > 20 else '')
         
-        # 6. 创建分析文本（修复版）
+        # 6. 创建分析文本
         print("📝 创建分析文本列...")
         analysis_texts = []
         
@@ -469,7 +465,7 @@ class DeepSeekNewsAnalyzer:
     
     def topic_modeling(self, n_topics: int = 5, method: str = 'lda') -> Dict[str, Any]:
         """
-        执行主题建模分析（修复版）
+        执行主题建模分析
         
         Args:
             n_topics: 主题数量
@@ -727,7 +723,7 @@ class DeepSeekNewsAnalyzer:
     
     def temporal_analysis(self) -> Dict[str, Any]:
         """
-        时间序列分析（修复版）
+        时间序列分析
         
         Returns:
             时间序列分析结果
@@ -859,7 +855,7 @@ class DeepSeekNewsAnalyzer:
             if '文章数量' not in self.df.columns:
                 self.df['文章数量'] = 1
             
-            # 转换为整数类型（修复格式化错误的关键）
+            # 转换为整数类型
             self.df['文章数量'] = pd.to_numeric(self.df['文章数量'], errors='coerce').fillna(1).astype(int)
             
             media_stats = self.df.groupby('来源').agg({
@@ -1310,7 +1306,7 @@ class DeepSeekNewsAnalyzer:
     
     def run_full_analysis(self, n_topics: int = 5):
         """
-        运行完整分析流程（修复版）
+        运行完整分析流程
         
         Args:
             n_topics: 主题数量
@@ -1319,7 +1315,6 @@ class DeepSeekNewsAnalyzer:
             包含所有分析结果的字典
         """
         print("=" * 80)
-        print("DeepSeek新闻数据分析系统 v2.1 (修复版)")
         print("=" * 80)
         
         start_time = datetime.now()
@@ -1383,8 +1378,6 @@ class DeepSeekNewsAnalyzer:
 
 def main():
     """主函数"""
-    print("DeepSeek新闻数据分析系统 - 修复版")
-    print("版本: 2.1")
     print("=" * 60)
     
     # 配置文件路径
@@ -1467,4 +1460,5 @@ if __name__ == "__main__":
     if response == 'y':
         main()
     else:
+
         print("已退出程序")
